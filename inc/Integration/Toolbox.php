@@ -8,7 +8,7 @@ class Toolbox {
         add_filter( 'toolbox_twig_views_locations'      , __CLASS__ . '::add_twigs_dir' , 25 ,1  );
         add_filter( 'timber/loader/loader'              , __CLASS__ . '::add_twig_namespace' );
 
-        // add_filter( 'toolbox/htmx_dirs'                 , __CLASS__ . '::htmx_twigs' , 10 , 1 ) ;
+        add_filter( 'toolbox/htmx_dirs'                 , __CLASS__ . '::htmx_twigs' , 10 , 1 ) ;
         
     }
     

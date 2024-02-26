@@ -33,6 +33,35 @@ FLBuilder::register_module( 'TMDemoHeading',
                     )
                 )
             )
-        )
+        ),
+        'content'    => array(
+            'title' => __( 'Content', 'fl-builder' ),
+            'file'  => FL_BUILDER_DIR . 'includes/loop-settings.php',
+        ),
+        'pagination' => array(
+            'title'    => __( 'Pagination', 'fl-builder' ),
+            'sections' => array(
+                'pagination'       => array(
+                    'title'  => __( 'Pagination', 'fl-builder' ),
+                    'fields' => array(
+                        'pagination'         => array(
+                            'type'    => 'select',
+                            'label'   => __( 'Pagination Style', 'fl-builder' ),
+                            'default' => 'numbers',
+                            'options' => array(
+                                'numbers'   => __( 'Numbers', 'fl-builder' ),
+                                'none'      => _x( 'None', 'Pagination style.', 'fl-builder' ),
+                            ),
+                        ),
+                        'posts_per_page'     => array(
+                            'type'    => 'text',
+                            'label'   => __( 'Posts Per Page', 'fl-builder' ),
+                            'default' => '10',
+                            'size'    => '4',
+                        ),
+                    ),
+                ),
+            ),
+        ),                          
     ) 
 );

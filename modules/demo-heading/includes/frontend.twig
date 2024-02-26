@@ -1,1 +1,81 @@
-<h2>{{ settings.heading_title|default( 'Heading title goes here' ) }}</h2>
+{#
+    TemplateType: htmx
+    Action: demo-heading
+
+#}
+{% set posts = null %}
+{% set args = null %}
+{% if constant( 'DOING_HTMX' ) is not defined %}
+    <h2>{{ settings.heading_title|default( 'Heading title goes here' ) }}</h2>
+    {# get the data_source setting from the Post Loop Builder #}
+    {% if settings.data_source == 'main_query' %}
+        {% set args = query.vars %}
+    {% elseif settings.data_source == 'custom_query' %}
+        {# use the qFLBuilderLoop::query method to process the settings and return stuff #}
+        {% set flquery = fn( 'FLBuilderLoop::query' , settings ) %}
+        {# use the returned query args and run our own Timber PostQuery because that one's awesome! #}
+        {% set args = flquery.query %}
+    {% endif %}
+{% endif %}
+{% set posts = PostQuery( args ) %}
+{% for item in posts %}
+    <h3>{{ item.title }}</h3>
+{% endfor %}
+{#
+    pagination
+#}
+{% if posts.pagination.total > 1 %}
+    {% for page in posts.pagination.pages %}
+    <a href="{{ page.link }}">{{ page.title }}</a>
+    {% endfor %}
+{% endif %}
+
+{# 
+    query
+    query_vars
+    tax_query
+    meta_query
+    date_query
+    request
+    posts
+    post_count
+    current_post
+    before_loop
+    in_the_loop
+    post
+    comment_count
+    current_comment
+    found_posts
+    max_num_pages
+    max_num_comment_pages
+    is_single
+    is_preview
+    is_page
+    is_archive
+    is_date
+    is_year
+    is_month
+    is_day
+    is_time
+    is_author
+    is_category
+    is_tag
+    is_tax
+    is_search
+    is_feed
+    is_comment_feed
+    is_trackback
+    is_home
+    is_privacy_policy
+    is_404
+    is_embed
+    is_paged
+    is_admin
+    is_attachment
+    is_singular
+    is_robots
+    is_favicon
+    is_posts_page
+    is_post_type_archive
+    thumbnails_cached
+#}
